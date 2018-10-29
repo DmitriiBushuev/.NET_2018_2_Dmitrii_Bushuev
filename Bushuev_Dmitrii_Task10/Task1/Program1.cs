@@ -5,13 +5,18 @@ namespace Task1
 {
     class Program1
     {
+        private delegate int Sort(string string1, string string2);//в 3 строчки
+
         static void Main(string[] args)
         {
             List<string> myStringArray = new List<string> { "qwerty", "qwertyqwerty", "qwe", "abc", "bbc", "abcdef" };
 
-            myStringArray.Sort(CompareByLength);
+            Sort sort = new Sort(CompareByLength);//в 3 строчки
+            myStringArray.Sort((x, y) => sort(x, y));//в 3 строчки
+            
+            //myStringArray.Sort(CompareByLength); - в одну строчку
 
-            foreach(string myStr in myStringArray)
+            foreach (string myStr in myStringArray)
             {
                 Console.WriteLine(myStr);
             }

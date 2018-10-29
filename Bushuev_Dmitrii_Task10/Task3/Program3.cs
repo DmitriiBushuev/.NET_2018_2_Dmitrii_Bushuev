@@ -12,14 +12,14 @@ namespace Task3
             List<string> myStringArray1 = new List<string> { "qwerty", "qwertyqwerty", "qwe", "abc", "bbc", "abcdef" };
             List<string> myStringArray2 = new List<string> { "aaaa", "cccc", "bbbb", "aaa", "ccc", "bbb" };
 
-            AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+            AutoResetEvent autoResetEvent1 = new AutoResetEvent(false);
             AutoResetEvent autoResetEvent2 = new AutoResetEvent(false);
 
-            Task.Factory.StartNew(() => Sort(myStringArray1, autoResetEvent));
-            Task.Factory.StartNew(() => Sort(myStringArray2, autoResetEvent2));
+            Sort(myStringArray1, autoResetEvent1);
+            Sort(myStringArray2, autoResetEvent2);
 
             //autoResetEvent.WaitOne();
-            WaitHandle.WaitAll(new[] { autoResetEvent, autoResetEvent2 });
+            WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2 });
 
             foreach (string myStr in myStringArray1)
             {
@@ -28,9 +28,9 @@ namespace Task3
 
             Console.WriteLine();
 
-            foreach (string myStr in myStringArray2)
+            foreach (string mystr in myStringArray2)
             {
-                Console.WriteLine(myStr);
+                Console.WriteLine(mystr);
             }
 
             Console.ReadKey();
@@ -38,9 +38,12 @@ namespace Task3
 
         private static void Sort(List<string> list, AutoResetEvent autoResetEvent)
         {
-            list.Sort(CompareByLength);
-            Task.Delay(2000);
-            autoResetEvent.Set();
+            Task.Factory.StartNew(() =>
+            {
+                list.Sort(CompareByLength);
+                Thread.Sleep(5000);
+                autoResetEvent.Set();
+            });
         }
 
         static int CompareByLength(string string1, string string2)
