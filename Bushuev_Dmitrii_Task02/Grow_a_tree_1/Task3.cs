@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Task3
 {
@@ -19,18 +18,6 @@ namespace Task3
                         string spaces = new string(' ', numberOfLevels - i - 1);
                         string stars = new string('*', i * 2);
                         Console.WriteLine(spaces + '*' + stars);
-                        /*StringBuilder strBuild = new StringBuilder();
-                        for (int spaces = 0; spaces < numberOfLevels - i - 1; spaces++) 
-                        {
-                            strBuild.Append(" ");
-                        }
-                        strBuild.Append("*");
-                        for (int countOfStars = 0; countOfStars < i; countOfStars++)
-                        {
-                            strBuild.Append("**");
-                        }
-                        string line = strBuild.ToString();*/
-                        //Console.WriteLine(line);
                     }
                     Console.WriteLine("Неплохо получилось! Нажми любую клавишу для выхода!");
                     Console.ReadKey();

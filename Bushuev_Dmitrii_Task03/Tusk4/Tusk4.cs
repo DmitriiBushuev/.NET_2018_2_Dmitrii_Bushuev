@@ -13,6 +13,9 @@ namespace Tusk4
                 int.TryParse(Console.ReadLine(), out arraySize2) && arraySize2 > 0)
             {
                 int[,] myArray = CreatIntArray2(arraySize1, arraySize2);
+
+                PrintTwoSideArr(myArray);
+
                 MySumOfEvenElements(myArray);
                 Console.WriteLine("Нажмие любую клавишу для выхода.");
                 Console.ReadKey();
@@ -53,12 +56,16 @@ namespace Tusk4
                         myArray[i, j] = rand.Next(-1000, 1000);
                 }
             }
+            return myArray;
+        }
+
+        public static void PrintTwoSideArr(int[,] myArray)
+        {
             Console.WriteLine("Элементы массива:");
             foreach (int elementOfArray in myArray)
             {
                 Console.WriteLine(elementOfArray);
             }
-            return myArray;
         }
     }
 }

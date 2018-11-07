@@ -17,7 +17,7 @@ namespace Task3
 
             string[] words = reg1.Split(myText);
 
-            Dictionary<string, int> dict = new Dictionary<string, int>();//создаём словарь где ключ - ключевое слово, значение - количество повторений слова
+            Dictionary<string, int> dict = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);//создаём словарь где ключ - ключевое слово, значение - количество повторений слова
 
             foreach (string word in words)//проверяем есть ли слово в словаре
             {

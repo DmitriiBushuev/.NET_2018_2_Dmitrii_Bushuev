@@ -14,7 +14,14 @@ namespace Task2
                 int.TryParse(Console.ReadLine(), out arraySize3) && arraySize3 > 0 )
             {
                 int[,,] myArray = CreatIntArray3(arraySize1, arraySize2, arraySize3);
+
+                Print(myArray);
+
                 MyPositiveToZero(myArray);
+
+                Console.WriteLine("Обратим положительные элементы в 0");
+                Print(myArray);
+
                 Console.WriteLine("Нажмие любую клавишу для выхода.");
                 Console.ReadKey();
                 return;
@@ -40,11 +47,6 @@ namespace Task2
                     }
                 }
             }
-            Console.WriteLine("Элементы массива:");
-            foreach (int elementOfArray in myArray)
-            {
-                Console.WriteLine(elementOfArray);
-            }
             return myArray;
         }
         public static void MyPositiveToZero(int[,,] myArray)
@@ -62,7 +64,11 @@ namespace Task2
                     }
                 }
             }
-            Console.WriteLine("Массив без положительных элементов:");
+        }
+
+        public static void Print(int[,,] myArray)
+        {
+            Console.WriteLine("Элементы массива:");
             foreach (int elementOfArray in myArray)
             {
                 Console.WriteLine(elementOfArray);

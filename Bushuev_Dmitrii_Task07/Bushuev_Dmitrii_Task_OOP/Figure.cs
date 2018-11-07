@@ -26,6 +26,6 @@ namespace Bushuev_Dmitrii_Task07
         }
 
         public abstract double GetLength();
-        public abstract void Draw();
+        public abstract void Draw(IPrinter printer);
     }
 }

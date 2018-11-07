@@ -13,7 +13,14 @@ namespace Tusk3
             if (int.TryParse(Console.ReadLine(), out arraySize) && arraySize > 0)
             {
                 int [] myArray = ArrayMethods.CreatIntArray(arraySize);
+
+                ArrayMethods.PrintOneSideArr(myArray);
+
                 SumOfPositiveElements(myArray);
+                
+                int sum = SumOfPositiveElements(myArray);
+                Console.WriteLine($"Сумма положительных элементов : {sum}");
+
                 Console.WriteLine("Нажмие любую клавишу для выхода.");
                 Console.ReadKey();
                 return;
@@ -25,7 +32,7 @@ namespace Tusk3
                 return;
             }
         }
-        public static void SumOfPositiveElements(int[] myArray)
+        public static int SumOfPositiveElements(int[] myArray)
         {
             int count = 0;
             foreach (int elementOfArray in myArray)
@@ -35,7 +42,7 @@ namespace Tusk3
                     count += elementOfArray;
                 }
             }
-            Console.WriteLine($"Сумма неотрицательных элементов массива: {count}");
+            return count;
         }
     }
 }

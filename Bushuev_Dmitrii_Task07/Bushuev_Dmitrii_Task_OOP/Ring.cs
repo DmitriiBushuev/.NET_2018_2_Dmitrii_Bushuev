@@ -54,15 +54,28 @@ namespace Bushuev_Dmitrii_Task07
             return LengthOfTwoCircles;
         }
 
-        public override void Draw()
+        public override void Draw(IPrinter p)
         {
-            Console.WriteLine(this.ToString());
+            p.Print(x1, y1, "ring");
         }
 
         public override string ToString()
         {
             return $"Это кольцо, координаты центра кольца: {X1},{Y1}, внутренний радиус: {InternalRadius}," +
                 $"внешний радиус {Radius}, суммарная длина внешнего и внутреннего кольца: {LengthOfTwoCircles}, площадь кольца: {Area}. ";
+        }
+    }
+
+    public interface IPrinter
+    {
+        void Print(double x1, double y1, string fName);
+    }
+
+    public class ConsolePrinter : IPrinter
+    {
+        public void Print(double x1, double y1, string fName)
+        {
+            Console.WriteLine();
         }
     }
 }
