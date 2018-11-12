@@ -15,9 +15,9 @@ namespace Task3
             // проверка совпадений хэш кодов
             int countHashRe = 0;
             Dictionary<int, Tuple<int, int>> dict = new Dictionary<int, Tuple<int, int>>();
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 1000; i++)
             {
-                for (int j = 0; j < 2000; j++)
+                for (int j = 0; j < 1000; j++)
                 {
                     TwoDPointWithHash point = new TwoDPointWithHash(i, j);
                     int hash = point.GetHashCode();
