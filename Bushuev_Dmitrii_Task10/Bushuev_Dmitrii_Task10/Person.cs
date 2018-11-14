@@ -2,26 +2,40 @@
 
 namespace Bushuev_Dmitrii_Task10
 {
+    public delegate void OnCame(Person p, DateTime time);
+    public delegate void OnLeave(Person p);
 
-    class Person
+    public class Person
     {
         public string Name { get; set; }
+        public event OnCame OnCame;
+        public event OnLeave OnLeave;
 
-        public void Greet(object anotherPerson, DateTimeEventArgs timeOfArrival)
+        public void GoToWork()
+        {
+            OnCame?.Invoke(this, DateTime.Now);
+        }
+
+        public void GoHome()
+        {
+            OnLeave?.Invoke(this);
+        }
+
+        public void SayHello(object anotherPerson, DateTime timeOfArrival)
         {
             string greet = string.Empty;
 
-            if (timeOfArrival.Time.Hour < 12)
+            if (timeOfArrival.Hour < 12)
             {
                 greet = "Good morning!";
             }
 
-            if (timeOfArrival.Time.Hour > 12 && timeOfArrival.Time.Hour < 17)
+            if (timeOfArrival.Hour > 12 && timeOfArrival.Hour < 17)
             {
                 greet = "Good afternoon!";
             }
 
-            if (timeOfArrival.Time.Hour > 17)
+            if (timeOfArrival.Hour > 17)
             {
                 greet = "Good evening!";
             }
@@ -29,36 +43,9 @@ namespace Bushuev_Dmitrii_Task10
             Console.WriteLine($"{greet} '{anotherPerson}!', {Name} said.");
         }
 
-        public void Goodbay(object anotherPerson, EventArgs args)
+        public void SayGoodBye(object anotherPerson)
         {
             Console.WriteLine($"Goodbay, {anotherPerson}!', {Name} said.");
         }
-
-
-
-        /* события
-        public event EventHandler<DateTimeEventArgs> Came;
-
-
-        public event EventHandler Gone;
-
-        public void OnCame()
-        {
-            Came?.Invoke(Name, new DateTimeEventArgs { Time = DateTime.Now });
-        }
-
-        public void OnGone()
-        {
-            Gone?.Invoke(Name, EventArgs.Empty);
-        }
-
-        public Person()
-        {
-            //Task.Factory.StartNew(() =>
-            //{
-            //    Thread.Sleep(5000);
-            //    OnCame();
-            //});
-        }*/
     }
 }
