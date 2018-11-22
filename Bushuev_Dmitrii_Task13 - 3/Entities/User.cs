@@ -128,6 +128,12 @@ namespace Entities
             }
         }
 
+        public void UpdateAwards(IEnumerable<string> newAwards)
+        {
+            ClearAwards();
+            AddAwards(newAwards);
+        }
+
         public string UserAwards
         {
             get

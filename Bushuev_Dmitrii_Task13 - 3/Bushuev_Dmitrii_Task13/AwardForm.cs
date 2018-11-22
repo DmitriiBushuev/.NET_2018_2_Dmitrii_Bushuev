@@ -6,6 +6,8 @@ namespace Bushuev_Dmitrii_Task13
 {
     public partial class AwardForm : Form
     {
+        bool flagForAdd = false;
+
         public string Title {get; set;}
         public string Description {get; set;}
 
@@ -34,6 +36,8 @@ namespace Bushuev_Dmitrii_Task13
 
         private void btn_AddAward_Click(object sender, EventArgs e)
         {
+            bool flagForAdd = true;
+
             if (this.ValidateChildren())
             {
                 DialogResult = DialogResult.OK;

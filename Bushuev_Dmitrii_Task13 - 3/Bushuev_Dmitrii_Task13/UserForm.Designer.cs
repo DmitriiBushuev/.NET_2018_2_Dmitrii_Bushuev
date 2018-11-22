@@ -122,6 +122,7 @@
             // 
             // UserForm
             // 
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(415, 255);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Ok);

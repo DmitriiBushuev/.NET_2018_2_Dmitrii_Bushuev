@@ -1,6 +1,7 @@
 ﻿using Department.BLL;
 using Entities;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Bushuev_Dmitrii_Task13
@@ -48,18 +49,44 @@ namespace Bushuev_Dmitrii_Task13
 
         private void ctlGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (lastNameSort == SortOrder.Asc)
+            var column = dataGridView1.Columns[e.ColumnIndex];
+
+            switch (column.Name)
             {
-                lastNameSort = SortOrder.Desc;
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = userBL.SortUsersByNameDesc();
+                case nameof(User.LastName):
+                    if (lastNameSort == SortOrder.Asc)
+                    {
+                        lastNameSort = SortOrder.Desc;
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = userBL.SortUsersByLastNameDesc();
+                    }
+                    else
+                    {
+                        lastNameSort = SortOrder.Asc;
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = userBL.SortUsersByLastNameAsc();
+                    }
+                    break;
+
+                case nameof(User.FirstName):
+                    if (lastNameSort == SortOrder.Asc)
+                    {
+                        lastNameSort = SortOrder.Desc;
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = userBL.SortUsersByFirstNameDesc();
+                    }
+                    else
+                    {
+                        lastNameSort = SortOrder.Asc;
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = userBL.SortUsersByFirstNameAsc();
+                    }
+                    break;
+
+                default:
+                    break;
             }
-            else
-            {
-                lastNameSort = SortOrder.Asc;
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = userBL.SortUsersByNameAsc();
-            }
+
             dataGridView1.Columns["IdUser"].Visible = false;
         }
 
@@ -130,10 +157,17 @@ namespace Bushuev_Dmitrii_Task13
                 var form = new AwardForm(award.Title, award.Description);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
+                    foreach (var user in userBL.GetList().Where(u => u.GetAwards().Contains(award.Title)))
+                    {
+                        user.DeleteAward(award.Title);
+                        user.AddAward(form.Title);
+                    }
+
                     award.Title = form.Title;
                     award.Description = form.Description;
 
-                    DisplayAwards();
+                    DisplayUsers();
+                    DisplayAwards(); 
                 }
             }
         }
@@ -148,9 +182,7 @@ namespace Bushuev_Dmitrii_Task13
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    user.ClearAwards();
-
-                    user.AddAwards(form.SelectedAwards);
+                    user.UpdateAwards(form.SelectedAwards);
 
                     DisplayUsers();
                 }

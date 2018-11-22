@@ -26,17 +26,31 @@ namespace Department.BLL
             return GetList();
         }
 
-        public IEnumerable<User> SortUsersByNameAsc()
+        public IEnumerable<User> SortUsersByLastNameAsc()
         {
             return (from s in GetList()
                     orderby s.LastName ascending
                     select s).ToList();
         }
 
-        public IEnumerable<User> SortUsersByNameDesc()
+        public IEnumerable<User> SortUsersByLastNameDesc()
         {
             return (from s in GetList()
                     orderby s.LastName descending
+                    select s).ToList();
+        }
+
+        public IEnumerable<User> SortUsersByFirstNameAsc()
+        {
+            return (from s in GetList()
+                    orderby s.FirstName ascending
+                    select s).ToList();
+        }
+
+        public IEnumerable<User> SortUsersByFirstNameDesc()
+        {
+            return (from s in GetList()
+                    orderby s.FirstName descending
                     select s).ToList();
         }
 
