@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace Department.BLL
@@ -12,8 +13,18 @@ namespace Department.BLL
 
         public AwardsBL()
         {
-            AwardsDAO = new AwardsSqlDAO();
+            if (!bool.TryParse(ConfigurationManager.AppSettings["UseDb"], out bool useDb))
+            {
+                useDb = false;
+            }
+
+            AwardsDAO = useDb ? new AwardsSqlDAO() : (IAwardsDAO)new AwardsDAO();
         }
+
+        //public AwardsBL()
+        //{
+        //    AwardsDAO = new AwardsSqlDAO();
+        //}
 
         public IEnumerable<Award> InitList()
         {
