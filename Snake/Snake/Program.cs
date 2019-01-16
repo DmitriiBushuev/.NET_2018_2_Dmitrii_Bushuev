@@ -24,11 +24,10 @@ namespace Snake
             rightLine.Draw();
 
             //Отрисовка точек
-            HorizontalLine hLine1 = new HorizontalLine(5, 10, 8, '+');
-            hLine1.Draw();
+            Point p = new Point(4, 5, '*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Draw();
 
-            VerticalLine vLine1 = new VerticalLine(10, 2, 12, '&');
-            vLine1.Draw();
 
 
             Console.ReadLine();
