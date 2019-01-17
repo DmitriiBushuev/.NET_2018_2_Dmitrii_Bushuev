@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snake
 {
     class Snake : Figure
     {
         Direction direction;
+        ConsoleKey oldKey = ConsoleKey.LeftArrow;
 
         public Snake(Point snakeTail, int snakeLenght, Direction _direction)
         {
@@ -46,13 +45,37 @@ namespace Snake
         public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
-                direction = Direction.LEFT;
+            {
+                if (oldKey != ConsoleKey.RightArrow)
+                {
+                    direction = Direction.LEFT;
+                    oldKey = key;
+                }
+            }
             else if (key == ConsoleKey.RightArrow)
-                direction = Direction.RIGHT;
+            {
+                if (oldKey != ConsoleKey.LeftArrow)
+                {
+                    direction = Direction.RIGHT;
+                    oldKey = key;
+                }
+            }
             else if (key == ConsoleKey.DownArrow)
-                direction = Direction.DOWN;
+            {
+                if (oldKey != ConsoleKey.UpArrow)
+                {
+                    direction = Direction.DOWN;
+                    oldKey = key;
+                }
+            }
             else if (key == ConsoleKey.UpArrow)
-                direction = Direction.UP;
+            {
+                if (oldKey != ConsoleKey.DownArrow)
+                {
+                    direction = Direction.UP;
+                    oldKey = key;
+                }
+            }
         }
 
         public bool Eat(Point food)
@@ -66,6 +89,17 @@ namespace Snake
             }
             else
                 return false;
+        }
+
+        public bool IsHitTail()
+        {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
         }
     }
 }
